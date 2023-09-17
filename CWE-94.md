@@ -1,4 +1,4 @@
-
+W
 ---
 
 ### Vulnerability Report: Code Injection (CWE-94)

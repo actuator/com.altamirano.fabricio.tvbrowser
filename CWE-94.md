@@ -21,6 +21,8 @@ The `MainActivity`'s WebView exposes certain JavaScript interfaces to web conten
 
 **Proof of Concept (Code Injection):**
 
+![image](https://github.com/actuator/com.altamirano.fabricio.tvbrowser/assets/78701239/5328134c-100c-4ede-9bc9-a52e01d55470)
+
 ```java
 public void launchBrowser() {
     // Constructing the JavaScript code to directly invoke the exposed JavaScript interface method.

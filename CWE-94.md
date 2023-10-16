@@ -57,6 +57,8 @@ Given the vulnerable app can be exploited by any other app regardless of its per
 2. The vulnerable app, acting as a zombie agent, sends a beacon to the C2 server.
 3. Upon receiving the beacon, the C2 server can issue commands exploiting the aforementioned vulnerabilities to execute arbitrary code or create/modify files.
 
+Arbitrary File Creation (AFC) vulnerabilities pose serious risks, enabling malicious actors to distribute illegal content, engage in blackmail, and complicate digital forensics. These vulnerabilities allow attackers to plant harmful files on devices, potentially leading to legal consequences for users. Digital extortion becomes a threat when incriminating evidence is fabricated and used for ransom. 
+
 ### Recommendations Update:
 1. **Assess Exported Activities**: Ensure activities are not unnecessarily exported. If they are, apply appropriate intent filters and permissions.
 2. **Restrict JavaScript Interfaces**: If the WebView in your application supports JavaScript, ensure it doesn't expose sensitive functionality or data to the running JavaScript.
@@ -65,5 +67,7 @@ Given the vulnerable app can be exploited by any other app regardless of its per
 ### References Update:
 - [CWE-94: Improper Control of Generation of Code ('Code Injection')](https://cwe.mitre.org/data/definitions/94.html)
 - [CWE-73: External Control of File Name or Path](https://cwe.mitre.org/data/definitions/73.html)
+
+
 
 ---

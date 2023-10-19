@@ -17,7 +17,7 @@ A remote attacker can invoke the `MainActivity` of the `com.altamirano.fabricio.
 
 ### Arbitrary File Creation via JavaScript Interface Exposure:
 
-The `MainActivity`'s WebView exposes certain JavaScript interfaces to web content, which exposes the app to arbitrary file creation vulnerabilities.
+The `MainActivity`'s WebView exposes certain JavaScript interfaces which can lead to arbitrary file creation vulnerabilities.
 
 **Proof of Concept (Code Injection):**
 

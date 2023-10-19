@@ -13,7 +13,7 @@ The `com.altamirano.fabricio.tvbrowser.MainActivity` activity is exported and ca
 
 ### Code Injection Details:
 
-An attacker can invoke the `MainActivity` of the `com.altamirano.fabricio.tvbrowser` app by sending an explicit intent. When a crafted URL containing malicious JavaScript is passed to the WebView, the code is executed within the app's context.
+A remote attacker can invoke the `MainActivity` of the `com.altamirano.fabricio.tvbrowser` app by sending an explicit intent. When a crafted URL containing malicious JavaScript is passed to the WebView, the code is executed within the app's context.
 
 ### Arbitrary File Creation via JavaScript Interface Exposure:
 

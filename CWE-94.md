@@ -40,29 +40,17 @@ public void launchBrowser() {
 
 ---
 
-## Addendum: Prerequisites for a C2 Framework via ACE & AFC
-
-### New Insights:
-
-The vulnerability assessment has discovered a more severe exploit vector for `com.altamirano.fabricio.tvbrowser.MainActivity`. The vulnerabilities previously identified can be chained to potentially form a half-duplex Command & Control (C2) framework. This means that an attacker can essentially turn any device with the vulnerable app into a zombie that communicates back to a command server (beaconing) and awaits further instructions.
 
 ### Exploit Overview:
 1. **Arbitrary Code Execution (ACE)**: Using the exported activity, an attacker can trigger the loading of malicious URLs, leading to code execution within the app's context.
 2. **Arbitrary File Creation (AFC)**: Using the exposed JavaScript interfaces, an attacker can create or overwrite files in the Downloads folder.
-
-Given the vulnerable app can be exploited by any other app regardless of its permissions, it becomes a potential stepping stone in a multi-stage attack. An innocent-looking app with no permissions can exploit the vulnerability and establish a link with a C2 server.
-
-### Technical Workflow:
-1. A malicious app or script triggers the vulnerable activity and instructs it to contact a predefined C2 server.
-2. The vulnerable app, acting as a zombie agent, sends a beacon to the C2 server.
-3. Upon receiving the beacon, the C2 server can issue commands exploiting the aforementioned vulnerabilities to execute arbitrary code or create/modify files.
 
 Arbitrary File Creation (AFC) vulnerabilities pose serious risks, enabling malicious actors to distribute illegal content, engage in blackmail, and complicate digital forensics. These vulnerabilities allow attackers to plant harmful files on devices, potentially leading to legal consequences for users. Digital extortion becomes a threat when incriminating evidence is fabricated and used for ransom. 
 
 ### Recommendations Update:
 1. **Assess Exported Activities**: Ensure activities are not unnecessarily exported. If they are, apply appropriate intent filters and permissions.
 2. **Restrict JavaScript Interfaces**: If the WebView in your application supports JavaScript, ensure it doesn't expose sensitive functionality or data to the running JavaScript.
-3. **Permissions Audit**: Regularly audit your app's permissions. Ensure they match its functionality. Limit its exposure, especially if it's been granted dangerous permissions.
+
 
 ### References Update:
 - [CWE-94: Improper Control of Generation of Code ('Code Injection')](https://cwe.mitre.org/data/definitions/94.html)

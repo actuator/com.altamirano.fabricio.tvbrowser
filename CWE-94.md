@@ -45,7 +45,7 @@ public void launchBrowser() {
 1. **Arbitrary Code Execution (ACE)**: Using the exported activity, an attacker can trigger the loading of malicious URLs, leading to code execution within the app's context.
 2. **Arbitrary File Creation (AFC)**: Using the exposed JavaScript interfaces, an attacker can create or overwrite files in the Downloads folder.
 
-Arbitrary File Creation (AFC) vulnerabilities pose serious risks, enabling malicious actors to distribute illegal content and potentially complicate digital forensics. 
+Arbitrary File Creation (AFC) vulnerabilities pose serious risks, enabling malicious actors to potentially complicate digital forensics. 
 
 ### Recommendations Update:
 1. **Assess Exported Activities**: Ensure activities are not unnecessarily exported. If they are, apply appropriate intent filters and permissions.

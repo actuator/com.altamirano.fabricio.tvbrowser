@@ -10,6 +10,7 @@ The `com.altamirano.fabricio.tvbrowser.MainActivity` activity is exported and ca
 
 ### Affected Component:
 - **Component**: `com.altamirano.fabricio.tvbrowser.MainActivity`
+- Ver 4.5.1 & earlier
 
 ### Code Injection Details:
 

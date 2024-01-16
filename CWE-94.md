@@ -37,7 +37,6 @@ public void launchBrowser() {
 }
 ```
 
-![TVBrowserDemo](https://github.com/actuator/com.altamirano.fabricio.tvbrowser/assets/78701239/5835748e-cd5a-4d06-bd95-d56d0700867f)
 
 ---
 

